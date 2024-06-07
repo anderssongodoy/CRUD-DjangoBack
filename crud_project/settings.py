@@ -76,8 +76,14 @@ WSGI_APPLICATION = 'crud_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'mssql',
+        'NAME': 'library',
+        'USER': 'sa',
+        'PASSWORD': '123',
+        'HOST': '.',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+        },
     }
 }
 

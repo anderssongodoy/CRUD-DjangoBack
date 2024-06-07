@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
 from .models import Book
 import json
 
@@ -15,6 +16,7 @@ def book_detail(request, pk):
     data = {"id": book.id, "title": book.title, "author": book.author}
     return JsonResponse(data)
 
+@csrf_exempt
 def book_create(request):
     if request.method == "POST":
         data = json.loads(request.body)

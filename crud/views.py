@@ -86,3 +86,8 @@ class PublisherListCreateView(generics.ListCreateAPIView):
 class PublisherRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Publisher.objects.all()
     serializer_class = PublisherSerializer
+
+from rest_framework.viewsets import ModelViewSet
+class BookViewSet(ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer

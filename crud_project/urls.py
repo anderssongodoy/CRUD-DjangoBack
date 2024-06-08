@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from crud.views import book_list, book_detail, book_create, BookListView, BookListAPIView, BookDetailView, BookDetailAPIView, PublisherListCreateView, PublisherRetrieveUpdateDestroyView, UserListCreateAPIView, UserRetrieveUpdateDestroyAPIView
+from crud.views import book_list, book_detail, book_create, BookListView, BookListAPIView, BookDetailView, BookDetailAPIView, PublisherListCreateView, PublisherRetrieveUpdateDestroyView, UserListCreateAPIView, UserRetrieveUpdateDestroyAPIView, TokenObtainView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +35,8 @@ urlpatterns = [
 
     path('users/', UserListCreateAPIView.as_view(), name='user-list-create'),
     path('users/<int:pk>/', UserRetrieveUpdateDestroyAPIView.as_view(), name='user-retrieve-update-destroy'),
+
+    path('api/token/', TokenObtainView.as_view(), name='token_obtain'),
 ]
 
 # from rest_framework.routers import DefaultRouter

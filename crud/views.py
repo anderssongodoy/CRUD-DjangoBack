@@ -67,38 +67,22 @@ class BookDetailView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 # METHODS APIVIEW
-class BookListAPIView(ListCreateAPIView):
+class BookListAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-class BookDetailAPIView(RetrieveUpdateDestroyAPIView):
+class BookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-    def get_object(self):
-        pk = self.kwargs.get('pk')
-        return get_object_or_404(Book, pk=pk)
+from .models import Publisher
+from .serializers import PublisherSerializer
 
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+# PUBLISHERS
+class PublisherListCreateView(generics.ListCreateAPIView):
+    queryset = Publisher.objects.all()
+    serializer_class = PublisherSerializer
 
-    def update(self, request, *args, **kwargs):
-        partial = kwargs.pop('partial', False)
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=partial)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
-        return Response(serializer.data)
-
-    def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-        self.perform_destroy(instance)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+class PublisherRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Publisher.objects.all()
+    serializer_class = PublisherSerializer

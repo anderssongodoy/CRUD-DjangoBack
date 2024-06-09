@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crud',
     'rest_framework',
+    'drf_yasg',
 ]
 
 from datetime import timedelta
